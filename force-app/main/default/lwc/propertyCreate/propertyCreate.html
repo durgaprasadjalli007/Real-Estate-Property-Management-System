@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="Create Property">
+
+        <lightning-record-edit-form
+            object-api-name="Property__c"
+            onsuccess={handleSuccess}
+            onerror={handleError}>
+
+            <lightning-messages></lightning-messages>
+
+            <lightning-input-field field-name="Name"></lightning-input-field>
+
+            <lightning-input-field field-name="Address__c"></lightning-input-field>
+
+            <lightning-input-field field-name="City__c"></lightning-input-field>
+
+            <lightning-input-field field-name="State__c"></lightning-input-field>
+
+            <lightning-input-field field-name="Postal_Code__c"></lightning-input-field>
+
+            <lightning-input-field field-name="Country__c"></lightning-input-field>
+
+            <lightning-input-field field-name="Type__c"></lightning-input-field>
+
+            <lightning-input-field field-name="Furnishing_Status__c"></lightning-input-field>
+
+            <lightning-input-field field-name="Status__c"></lightning-input-field>
+
+            <lightning-input-field field-name="Rent__c"></lightning-input-field>
+
+            <lightning-input-field field-name="Description__c"></lightning-input-field>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    variant="brand"
+                    type="submit"
+                    label="Save Property">
+                </lightning-button>
+            </div>
+
+        </lightning-record-edit-form>
+
+    </lightning-card>
+</template>

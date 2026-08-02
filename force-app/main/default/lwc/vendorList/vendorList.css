@@ -1,0 +1,119 @@
+:host {
+    display: block;
+}
+
+/* ---------------- Header ---------------- */
+
+.header {
+    background: #f3f6f9;
+    border-bottom: 1px solid #d8dde6;
+    padding: 24px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #16325c;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    color: #54698d;
+    font-size: 0.95rem;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+}
+
+/* ---------------- Filters ---------------- */
+
+.filterContainer {
+    background: #ffffff;
+    border: 1px solid #d8dde6;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.searchButton {
+    margin-top: 1.6rem;
+}
+
+/* ---------------- Record Count ---------------- */
+
+.recordCount {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #444;
+    margin: 1rem 0;
+}
+
+/* ---------------- Table ---------------- */
+
+.tableContainer {
+    border: 1px solid #d8dde6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ---------------- Empty State ---------------- */
+
+.emptyState {
+    text-align: center;
+    padding: 3rem;
+    color: #54698d;
+}
+
+.emptyState h2 {
+    margin: 1rem 0 0.5rem;
+    color: #16325c;
+}
+
+.emptyState p {
+    color: #706e6b;
+}
+
+/* ---------------- Pagination ---------------- */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 1rem 0;
+}
+
+.pageText {
+    font-weight: 600;
+    color: #16325c;
+}
+
+/* ---------------- Modal ---------------- */
+
+.slds-modal__container {
+    max-width: 40rem;
+    width: 90%;
+}
+
+/* ---------------- Mobile ---------------- */
+
+@media only screen and (max-width: 768px) {
+
+    .buttonGroup {
+        width: 100%;
+        margin-top: 1rem;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .pagination {
+        flex-direction: column;
+    }
+
+    .searchButton {
+        margin-top: 0.5rem;
+    }
+
+}
