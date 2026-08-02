@@ -59,7 +59,7 @@ private class LeaseAgreementControllerTest {
 
         System.assertNotEquals(null, result);
 
-        System.assertEquals('Lease-001', result.Name);
+        System.assertEquals('LA- 100020', result.Name);
 
         System.assertNotEquals(null, result.Property__c);
 

@@ -1,5 +1,15 @@
+/**
+ * Controller class for sending Lease Agreement PDFs
+ * to tenants via email.
+ */
 public with sharing class LeaseAgreementEmailController {
 
+    /**
+     * Sends the Lease Agreement PDF to the tenant's email.
+     *
+     * @param leaseId Id of the Lease Agreement record.
+     * @param pdfContent Base64 encoded PDF content.
+     */
     @AuraEnabled
     public static void sendLeaseAgreement(Id leaseId, String pdfContent) {
 
@@ -12,7 +22,7 @@ public with sharing class LeaseAgreementEmailController {
             LIMIT 1
         ];
 
-        if(String.isBlank(lease.Tenant__r.Email__c)){
+        if (lease.Tenant__r == null ||String.isBlank(lease.Tenant__r.Email__c)) {
             throw new AuraHandledException('Tenant email is missing.');
         }
 
