@@ -1,0 +1,231 @@
+<template>
+
+    <lightning-card icon-name="standard:service_appointment">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <div class="slds-grid slds-wrap slds-grid_align-spread slds-grid_vertical-align-center">
+
+                <div>
+
+                    <h1 class="title">
+                        Maintenance Request Management
+                    </h1>
+
+                    <p class="subtitle">
+                        Track and manage maintenance requests.
+                    </p>
+
+                </div>
+
+                <div class="slds-grid slds-gutters_small">
+
+                    <lightning-button
+                        label="Refresh"
+                        icon-name="utility:refresh"
+                        onclick={refreshRequests}>
+                    </lightning-button>
+
+                    <lightning-button
+                        variant="brand"
+                        label="New Request"
+                        icon-name="utility:add"
+                        onclick={handleNewRequest}>
+                    </lightning-button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Filters -->
+
+        <div class="slds-p-around_medium">
+
+            <div class="filterContainer">
+
+                <lightning-layout
+                    multiple-rows
+                    vertical-align="end">
+
+                    <!-- Search -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="5"
+                        padding="around-small">
+
+                        <lightning-input
+                            type="search"
+                            label="Search"
+                            placeholder="Search by Request Number, Property, Vendor or Description"
+                            value={searchKey}
+                            onchange={handleSearch}>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+
+                    <!-- Status -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="3"
+                        padding="around-small">
+
+                        <lightning-combobox
+                            label="Status"
+                            value={status}
+                            options={statusOptions}
+                            onchange={handleStatusChange}>
+                        </lightning-combobox>
+
+                    </lightning-layout-item>
+
+                    <!-- Clear Filters -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="2"
+                        padding="around-small">
+
+                        <lightning-button
+                            class="searchButton"
+                            label="Clear Filters"
+                            icon-name="utility:clear"
+                            onclick={clearFilters}>
+                        </lightning-button>
+
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+            </div>
+
+        </div>
+
+        <!-- Spinner -->
+
+        <template if:true={isLoading}>
+
+            <lightning-spinner
+                alternative-text="Loading"
+                size="medium">
+            </lightning-spinner>
+
+        </template>
+
+        <!-- Record Count -->
+
+        <div class="slds-p-horizontal_medium">
+
+            <div class="recordCount">
+
+                Showing {startRecord} - {endRecord}
+                of {totalRecords} Maintenance Requests
+
+            </div>
+
+        </div>
+
+        <!-- Datatable -->
+
+        <template if:true={requests.length}>
+
+            <div class="slds-p-horizontal_medium slds-m-top_small">
+
+                <div class="tableContainer">
+
+                    <lightning-datatable
+
+                        key-field="Id"
+
+                        data={requests}
+
+                        columns={columns}
+
+                        sorted-by={sortedBy}
+
+                        sorted-direction={sortDirection}
+
+                        onsort={handleSort}
+
+                        onrowaction={handleRowAction}
+
+                        hide-checkbox-column
+
+                        show-row-number-column>
+
+                    </lightning-datatable>
+
+                </div>
+
+            </div>
+
+        </template>
+
+        <!-- Empty State -->
+
+        <template if:false={requests.length}>
+
+            <div class="emptyState">
+
+                <lightning-icon
+                    icon-name="utility:info"
+                    size="large">
+                </lightning-icon>
+
+                <h2>
+
+                    No Maintenance Requests Found
+
+                </h2>
+
+                <p>
+
+                    Click
+                    <strong>New Request</strong>
+                    to create your first maintenance request.
+
+                </p>
+
+            </div>
+
+        </template>
+
+        <!-- Pagination -->
+
+        <template if:true={requests.length}>
+
+            <div class="pagination">
+
+                <lightning-button
+                    label="Previous"
+                    icon-name="utility:chevronleft"
+                    onclick={previousPage}
+                    disabled={disablePrevious}>
+                </lightning-button>
+
+                <span class="pageText">
+
+                    Page {pageNumber} of {totalPages}
+
+                </span>
+
+                <lightning-button
+                    label="Next"
+                    icon-name="utility:chevronright"
+                    icon-position="right"
+                    onclick={nextPage}
+                    disabled={disableNext}>
+                </lightning-button>
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+
+</template>

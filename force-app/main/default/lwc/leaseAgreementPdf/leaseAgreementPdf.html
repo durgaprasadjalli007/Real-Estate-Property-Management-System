@@ -1,0 +1,56 @@
+<template>
+    <lightning-card title="Lease Agreement" icon-name="standard:contract">
+        <div class="slds-p-around_medium">
+
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+
+            <template lwc:if={lease}>
+                <div class="slds-box slds-theme_shade slds-var-m-bottom_medium">
+                    <p><strong>Agreement:</strong> {lease.Name}</p>
+                    <p><strong>Property:</strong> {propertyName}</p>
+                    <p><strong>Tenant:</strong> {tenantName}</p>
+                    <p><strong>Start Date:</strong> {lease.Start_Date__c}</p>
+                    <p><strong>End Date:</strong> {lease.End_Date__c}</p>
+                    <p><strong>Monthly Rent:</strong> {lease.Monthly_Rent__c}</p>
+                    <p><strong>Terms:</strong> {lease.Terms__c}</p>
+                </div>
+
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-button
+                            variant="brand"
+                            label="Download PDF"
+                            icon-name="utility:download"
+                            onclick={handleDownloadPdf}
+                            disabled={isLoading}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-button
+                            variant="success"
+                            label="Send to Tenant"
+                            icon-name="utility:email"
+                            onclick={handleSendEmail}
+                            disabled={isSending}>
+                        </lightning-button>
+                    </div>
+                </div>
+
+                <template lwc:if={successMessage}>
+                    <div class="slds-notify slds-notify_toast slds-theme_success slds-var-m-top_small" role="alert">
+                        <p>{successMessage}</p>
+                    </div>
+                </template>
+
+                <template lwc:if={errorMessage}>
+                    <div class="slds-notify slds-notify_toast slds-theme_error slds-var-m-top_small" role="alert">
+                        <p>{errorMessage}</p>
+                    </div>
+                </template>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

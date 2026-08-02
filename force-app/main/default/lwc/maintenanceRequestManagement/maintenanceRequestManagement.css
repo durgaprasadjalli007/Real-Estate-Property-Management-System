@@ -1,0 +1,168 @@
+.header {
+
+    background: #f3f6f9;
+
+    border-bottom: 1px solid #d8dde6;
+
+    padding: 24px;
+
+}
+
+.title {
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    color: #16325c;
+
+    margin-bottom: 6px;
+
+}
+
+.subtitle {
+
+    color: #54698d;
+
+    font-size: 0.95rem;
+
+}
+
+.tableContainer {
+
+    margin-top: 20px;
+
+    border: 1px solid #d8dde6;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+}
+
+.recordCount {
+
+    display: inline-block;
+
+    margin-top: 18px;
+
+    margin-bottom: 14px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #16325c;
+
+}
+
+.pagination {
+
+    margin-top: 24px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+.pageText {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #16325c;
+
+}
+
+.emptyState {
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: #706e6b;
+
+}
+
+.emptyState h2 {
+
+    margin-top: 16px;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+}
+
+.emptyState p {
+
+    margin-top: 8px;
+
+    font-size: 15px;
+
+}
+
+.searchButton {
+
+    margin-top: 24px;
+
+}
+
+lightning-button {
+
+    --slds-c-button-radius-border: 6px;
+
+}
+
+.slds-table tbody tr {
+
+    height: 52px;
+
+}
+
+.slds-table tbody tr:hover {
+
+    background: #f8f9fb;
+
+}
+
+@media only screen and (max-width: 768px) {
+
+    .header {
+
+        padding: 16px;
+
+    }
+
+    .title {
+
+        font-size: 1.5rem;
+
+    }
+
+    .pagination {
+
+        flex-direction: column;
+
+        gap: 12px;
+
+    }
+    .buttonGroup{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+}

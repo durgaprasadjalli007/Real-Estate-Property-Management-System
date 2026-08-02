@@ -1,0 +1,304 @@
+<template>
+
+    <lightning-card icon-name="standard:household">
+
+        <!-- Header -->
+        <div class="header slds-p-horizontal_medium slds-p-top_medium slds-p-bottom_small">
+
+            <div class="slds-grid slds-wrap slds-grid_align-spread slds-grid_vertical-align-center">
+
+                <div>
+                    <h1 class="title">Property Management</h1>
+                    <p class="subtitle">
+                        Manage residential and commercial properties.
+                    </p>
+                </div>
+
+                <div class="buttonGroup">
+
+                    <lightning-button
+                        label="Refresh"
+                        icon-name="utility:refresh"
+                        onclick={refreshProperties}
+                        class="slds-m-right_small">
+                    </lightning-button>
+
+                    <lightning-button
+                        variant="brand"
+                        label="New Property"
+                        icon-name="utility:add"
+                        onclick={handleNewProperty}>
+                    </lightning-button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+
+            <!-- Search Filters -->
+
+            <div class="filterContainer">
+
+                <lightning-layout multiple-rows vertical-align="end">
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="3"
+                        large-device-size="3"
+                        class="filterItem">
+
+                        <lightning-input
+                            type="number"
+                            label="Maximum Rent"
+                            value={maxPrice}
+                            onchange={handlePriceChange}>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="3"
+                        large-device-size="3"
+                        class="filterItem">
+
+                        <lightning-combobox
+                            label="Availability Status"
+                            value={status}
+                            options={statusOptions}
+                            onchange={handleStatusChange}>
+                        </lightning-combobox>
+
+                    </lightning-layout-item>
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="3"
+                        large-device-size="3"
+                        class="filterItem">
+
+                        <lightning-combobox
+                            label="Furnishing Status"
+                            value={furnishingStatus}
+                            options={furnishingOptions}
+                            onchange={handleFurnishingChange}>
+                        </lightning-combobox>
+
+                    </lightning-layout-item>
+
+                    <!-- Distance -->
+
+<lightning-layout-item
+    size="12"
+    medium-device-size="2"
+    large-device-size="2"
+    class="filterItem">
+
+    <lightning-input
+        type="number"
+        label="Distance (KM)"
+        value={distance}
+        min="1"
+        onchange={handleDistanceChange}>
+    </lightning-input>
+
+</lightning-layout-item>
+
+<!-- Current Location -->
+
+<lightning-layout-item
+    size="12"
+    medium-device-size="2"
+    large-device-size="2"
+    class="filterButton">
+
+    <div class="buttonContainer">
+
+        <lightning-button
+            label="Use My Location"
+            icon-name="utility:location"
+            onclick={getCurrentLocation}>
+        </lightning-button>
+
+    </div>
+
+</lightning-layout-item>
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="3"
+                        large-device-size="3"
+                        class="filterButton">
+
+                        <div class="buttonContainer">
+
+                            <lightning-button
+                                variant="brand"
+                                label="Search"
+                                icon-name="utility:search"
+                                onclick={handleSearch}>
+                            </lightning-button>
+
+                            <lightning-button
+                                label="Clear Filters"
+                                icon-name="utility:clear"
+                                onclick={handleClearFilters}
+                                class="slds-m-left_small">
+                            </lightning-button>
+
+                        </div>
+
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+            </div>
+
+            <!-- Spinner -->
+
+            <template if:true={isLoading}>
+
+                <lightning-spinner
+                    alternative-text="Loading Properties"
+                    size="medium">
+                </lightning-spinner>
+
+            </template>
+
+            <!-- Record Count -->
+
+            <div class="recordInfo">
+
+                <span class="recordText">
+                    Showing {startRecord}
+                    -
+                    {endRecord}
+                    of
+                    {totalRecords}
+                    Properties
+                </span>
+
+            </div>
+
+            <!-- Datatable -->
+
+            <template if:true={properties.length}>
+
+                <div class="tableContainer">
+
+                    <lightning-datatable
+                        key-field="Id"
+                        data={properties}
+                        columns={columns}
+                        hide-checkbox-column
+                        show-row-number-column>
+                    </lightning-datatable>
+
+                </div>
+
+            </template>
+
+            <!-- Empty State -->
+
+            <template if:false={properties.length}>
+
+                <div class="emptyState">
+
+                    <lightning-icon
+                        icon-name="utility:search"
+                        size="large">
+                    </lightning-icon>
+
+                    <h2>No Properties Found</h2>
+
+                    <p>
+                        Try changing your search filters.
+                    </p>
+
+                </div>
+
+            </template>
+
+            <!-- Pagination -->
+
+            <div class="pagination">
+
+                <lightning-button
+                    label="Previous"
+                    icon-name="utility:chevronleft"
+                    onclick={previousPage}
+                    disabled={disablePrevious}>
+                </lightning-button>
+
+                <span class="pageText">
+                    Page {pageNumber} of {totalPages}
+                </span>
+
+                <lightning-button
+                    label="Next"
+                    icon-name="utility:chevronright"
+                    icon-position="right"
+                    onclick={nextPage}
+                    disabled={disableNext}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+    <!-- ===================== -->
+    <!-- Create Property Modal -->
+    <!-- ===================== -->
+
+    <template if:true={showCreatePropertyModal}>
+
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container slds-modal_large">
+
+                <!-- Modal Header -->
+
+                <header class="slds-modal__header">
+
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        alternative-text="Close"
+                        onclick={closeModal}
+                        class="slds-modal__close">
+                    </lightning-button-icon>
+
+                    <h2 class="slds-text-heading_medium">
+                        Create Property
+                    </h2>
+
+                </header>
+
+                <!-- Modal Body -->
+
+                <div class="slds-modal__content slds-p-around_medium">
+
+                    <c-create-property
+                        onsuccess={handlePropertyCreated}
+                        oncancel={closeModal}>
+                    </c-create-property>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+
+</template>

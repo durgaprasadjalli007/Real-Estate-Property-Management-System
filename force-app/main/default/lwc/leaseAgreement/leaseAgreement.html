@@ -1,0 +1,126 @@
+<template>
+
+    <lightning-card title="Lease Agreement" icon-name="standard:contract">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-record-edit-form
+                object-api-name="Lease_Agreement__c"
+                onsubmit={handleSubmit}
+                onsuccess={handleSuccess}>
+
+                <lightning-messages></lightning-messages>
+
+                <lightning-layout multiple-rows>
+
+                    <!-- Property -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="6">
+
+                        <lightning-record-picker
+                            label="Property"
+                            object-api-name="Property__c"
+                            onchange={handlePropertyChange}>
+                        </lightning-record-picker>
+
+                    </lightning-layout-item>
+
+                    <!-- Tenant -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="6">
+
+                        <lightning-input-field
+                            field-name="Tenant__c">
+                        </lightning-input-field>
+
+                    </lightning-layout-item>
+
+                    <!-- Monthly Rent -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="6">
+
+                        <lightning-input
+                            label="Monthly Rent"
+                            value={monthlyRent}
+                            read-only>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+
+                    <!-- Start Date -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="6">
+
+                        <lightning-input-field
+                            field-name="Start_Date__c"
+                            required>
+                        </lightning-input-field>
+
+                    </lightning-layout-item>
+
+                    <!-- End Date -->
+
+                    <lightning-layout-item
+                        size="12"
+                        medium-device-size="6">
+
+                        <lightning-input-field
+                            field-name="End_Date__c"
+                            required>
+                        </lightning-input-field>
+
+                    </lightning-layout-item>
+
+                    <!-- Terms -->
+
+                    <lightning-layout-item size="12">
+
+                        <lightning-input-field
+                            field-name="Terms__c">
+                        </lightning-input-field>
+
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-button
+                        type="submit"
+                        variant="brand"
+                        label="Save Lease">
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Generate PDF"
+                        variant="success"
+                        icon-name="utility:download"
+                        onclick={generatePDF}
+                        class="slds-m-left_small">
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Send PDF"
+                        variant="brand-outline"
+                        icon-name="utility:email"
+                        onclick={sendPDF}
+                        class="slds-m-left_small">
+                    </lightning-button>
+
+                </div>
+
+            </lightning-record-edit-form>
+
+        </div>
+
+    </lightning-card>
+
+</template>

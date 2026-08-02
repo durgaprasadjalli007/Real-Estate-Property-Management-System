@@ -1,0 +1,137 @@
+.header{
+
+    background:#f3f6f9;
+
+    border-bottom:1px solid #d8dde6;
+
+    padding:24px;
+
+}
+
+.title{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#16325c;
+
+}
+
+.subtitle{
+
+    margin-top:4px;
+
+    font-size:14px;
+
+    color:#54698d;
+
+}
+
+.buttonGroup{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.filterContainer{
+
+    background:#fafaf9;
+
+    border:1px solid #d8dde6;
+
+    border-radius:8px;
+
+    padding:18px;
+
+}
+
+.searchButton{
+
+    margin-top:24px;
+
+}
+
+.recordCount{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#16325c;
+
+    margin-bottom:10px;
+
+}
+
+.tableContainer{
+
+    margin-top:16px;
+
+    border:1px solid #d8dde6;
+
+    border-radius:6px;
+
+    overflow:hidden;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.pagination{
+
+    margin-top:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.pageText{
+
+    font-size:15px;
+
+    font-weight:bold;
+
+}
+
+.emptyState{
+
+    text-align:center;
+
+    padding:50px;
+
+    color:#706e6b;
+
+}
+
+.emptyState h2{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+.emptyState p{
+
+    margin-top:8px;
+
+}
+
+lightning-button{
+
+    --slds-c-button-radius-border:6px;
+
+}
